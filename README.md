@@ -1,6 +1,6 @@
-#Playfinder Tech Test
+# Playfinder Tech Test
 
-###API
+### API
 GET /pitches - complete with functional tests
 
 GET /pitches/1 - complete with functional tests 
@@ -9,7 +9,7 @@ GET /pitches/1/slots - complete with functional tests
 
 POST /pitches/1/slots - incomplete
 
-###Notes
+### Notes
 
 I would have liked to cover the jsonapi classes with 
 unit tests. However, due to the time spent attempting to 
