@@ -1,0 +1,6 @@
+doctrine:
+    dbal:
+        driver:  pdo_sqlite
+        memory:  true
+        url: 'sqlite:///test.db'
+

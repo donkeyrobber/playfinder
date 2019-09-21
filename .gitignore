@@ -1,0 +1,4 @@
+mysql/data
+php/api/vendor
+php/api/test.db
+.idea

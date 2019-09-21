@@ -1,0 +1,23 @@
+version: "3"
+
+services:
+  mysql:
+    image: mariadb:10.0.33
+    volumes:
+      - ./mysql/data:/var/lib/mysql
+      - ./mysql/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: ZDX%BRNwh6gW#AWZ
+      MYSQL_USER: pfinder
+      MYSQL_DATABASE: playfinder
+      MYSQL_PASSWORD: c5b6yeh37BXEaBDa
+  php:
+    build:
+      context: php
+    ports:
+      - 8081:80
+    volumes:
+      - ./php:/usr/src/
+    command: "php -S 0.0.0.0:80 -t public"
