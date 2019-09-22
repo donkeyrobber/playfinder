@@ -23,7 +23,7 @@ class SlotCollection implements IteratorAggregate, PaginationLinkProviderInterfa
     /**
      * @var int
      */
-    private $totalItems;
+    private $total_items;
     /**
      * @var int
      */
@@ -32,10 +32,10 @@ class SlotCollection implements IteratorAggregate, PaginationLinkProviderInterfa
      * @var int
      */
     private $size;
-    public function __construct(array $items, int $totalItems = 0, int $page = 0, int $size = 0)
+    public function __construct(array $items, int $total_items = 0, int $page = 0, int $size = 0)
     {
         $this->items = new \ArrayIterator($items);
-        $this->totalItems = $totalItems;
+        $this->total_items = $total_items;
         $this->page = $page;
         $this->size = $size;
     }
@@ -56,11 +56,11 @@ class SlotCollection implements IteratorAggregate, PaginationLinkProviderInterfa
     }
     public function getTotalItems(): int
     {
-        return $this->totalItems;
+        return $this->total_items;
     }
-    public function setTotalItems(int $totalItems): void
+    public function setTotalItems(int $total_items): void
     {
-        $this->totalItems = $totalItems;
+        $this->total_items = $total_items;
     }
     public function getPage(): int
     {

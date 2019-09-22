@@ -78,15 +78,15 @@ class PitchController extends Controller
     /**
      * @Route("/{id}/slots", name="post_slots", methods="POST")
      */
-    public function postSlotsAction(ValidatorInterface $validator, PitchRepository $pitchRepository, UuidGenerator $uuidGenerator, DefaultExceptionFactory $exceptionFactory): ResponseInterface
+    public function postSlotsAction(ValidatorInterface $validator, PitchRepository $pitch_repository, UuidGenerator $uuid_generator, DefaultExceptionFactory $exception_factory): ResponseInterface
     {
         $pitch_id = $this->jsonApi()->getRequest()->getAttribute('id');
 
-        $pitch = $pitchRepository->find($pitch_id);
+        $pitch = $pitch_repository->find($pitch_id);
 
-        $entityManager = $this->getDoctrine()->getManager();
+        $entity_manager = $this->getDoctrine()->getManager();
 
-        $slot = $this->jsonApi()->hydrate(new CreateSlotHydrator($entityManager, $exceptionFactory, $uuidGenerator), new Slot());
+        $slot = $this->jsonApi()->hydrate(new CreateSlotHydrator($entity_manager, $exception_factory, $uuid_generator), new Slot());
 
         $slot->setPitch($pitch);
 
@@ -96,8 +96,8 @@ class PitchController extends Controller
             return $this->validationErrorResponse($errors);
         }
 
-        $entityManager->persist($slot);
-        $entityManager->flush();
+        $entity_manager->persist($slot);
+        $entity_manager->flush();
 
         return $this->jsonApi()->respond()->ok(
             new SlotDocument(new SlotResourceTransformer()),

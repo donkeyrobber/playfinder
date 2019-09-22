@@ -22,14 +22,14 @@ abstract class AbstractSlotHydrator extends AbstractHydrator
      * {@inheritdoc}
      */
     protected function validateClientGeneratedId(
-        string $clientGeneratedId,
+        string $client_generated_id,
         JsonApiRequestInterface $request,
-        ExceptionFactoryInterface $exceptionFactory
+        ExceptionFactoryInterface $exception_factory
     ): void {
         if (!empty($clientGeneratedId)) {
-            throw $exceptionFactory->createClientGeneratedIdNotSupportedException(
+            throw $exception_factory->createClientGeneratedIdNotSupportedException(
                 $request,
-                $clientGeneratedId
+                $client_generated_id
             );
         }
     }
@@ -82,7 +82,7 @@ abstract class AbstractSlotHydrator extends AbstractHydrator
     protected function getRelationshipHydrator($slot): array
     {
         return [
-            'pitch' => function (Slot $slot, ToOneRelationship $pitch, $data, $relationshipName) {
+            'pitch' => function (Slot $slot, ToOneRelationship $pitch, $data, $relationship_name) {
                 $this->validateRelationType($pitch, ['pitches']);
 
 
@@ -93,7 +93,7 @@ abstract class AbstractSlotHydrator extends AbstractHydrator
                         ->find($identifier->getId());
 
                     if (is_null($association)) {
-                        throw new InvalidRelationshipValueException($relationshipName, [$identifier->getId()]);
+                        throw new InvalidRelationshipValueException($relationship_name, [$identifier->getId()]);
                     }
                 }
 

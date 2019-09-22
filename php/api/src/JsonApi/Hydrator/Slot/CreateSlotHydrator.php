@@ -13,13 +13,13 @@ use WoohooLabs\Yin\JsonApi\Exception\ExceptionFactoryInterface;
  */
 class CreateSlotHydrator extends AbstractSlotHydrator
 {
-    private $uuidGenerator;
+    private $uuid_generator;
 
-    public function __construct( ObjectManager $objectManager, ExceptionFactoryInterface $exceptionFactory, UuidGenerator $uuidGenerator)
+    public function __construct( ObjectManager $object_manager, ExceptionFactoryInterface $exception_factory, UuidGenerator $uuid_generator)
     {
-        $this->uuidGenerator = $uuidGenerator;
+        $this->uuid_generator = $uuid_generator;
 
-        parent::__construct($objectManager, $exceptionFactory);
+        parent::__construct($object_manager, $exception_factory);
     }
 
     /**
@@ -48,7 +48,7 @@ class CreateSlotHydrator extends AbstractSlotHydrator
 
     protected function generateId(): string
     {
-        return $this->uuidGenerator->generate($this->objectManager, new Slot());
+        return $this->uuid_generator->generate($this->objectManager, new Slot());
     }
 
     protected function setId($slot, string $id): Slot
