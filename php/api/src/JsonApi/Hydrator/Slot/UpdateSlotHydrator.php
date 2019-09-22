@@ -32,4 +32,10 @@ class UpdateSlotHydrator extends AbstractSlotHydrator
             },
         ];
     }
+
+    protected function setId($slot, string $id): Slot
+    {
+        $slot->setId($id);
+        return $slot;
+    }
 }

@@ -20,10 +20,12 @@ use App\JsonApi\Transformer\SlotResourceTransformer;
 use App\Repository\PitchRepository;
 use App\Repository\SlotRepository;
 use App\ResourceCollection\SlotCollection;
+use Doctrine\ORM\Id\UuidGenerator;
 use Paknahad\JsonApiBundle\Controller\Controller;
 use Paknahad\JsonApiBundle\Helper\ResourceCollection;
 use Psr\Http\Message\ResponseInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
 use WoohooLabs\Yin\JsonApi\Exception\DefaultExceptionFactory;
 
@@ -76,11 +78,23 @@ class PitchController extends Controller
     /**
      * @Route("/{id}/slots", name="post_slots", methods="POST")
      */
-    public function postSlotsAction(ValidatorInterface $validator, PitchRepository $pitch_repository, DefaultExceptionFactory $exceptionFactory): ResponseInterface
+    public function postSlotsAction(ValidatorInterface $validator, PitchRepository $pitchRepository, UuidGenerator $uuidGenerator, DefaultExceptionFactory $exceptionFactory): ResponseInterface
     {
+        $pitch_id = $this->jsonApi()->getRequest()->getAttribute('id');
+
+        $pitch = $pitchRepository->find($pitch_id);
+
         $entityManager = $this->getDoctrine()->getManager();
 
-        $slot = $this->jsonApi()->hydrate(new CreateSlotHydrator($entityManager, $exceptionFactory), new Slot());
+        $slot = $this->jsonApi()->hydrate(new CreateSlotHydrator($entityManager, $exceptionFactory, $uuidGenerator), new Slot());
+
+        $slot->setPitch($pitch);
+
+        /** @var ConstraintViolationList $errors */
+        $errors = $validator->validate($slot);
+        if ($errors->count() > 0) {
+            return $this->validationErrorResponse($errors);
+        }
 
         $entityManager->persist($slot);
         $entityManager->flush();

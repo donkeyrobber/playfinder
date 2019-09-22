@@ -17,6 +17,7 @@ class AppFixtures extends Fixture
         $manager->persist($pitch);
 
         $slot = new Slot();
+        $slot->setId('abc-123');
         $slot->setPitch($pitch);
         $slot->setStarts(new \DateTime('2019-09-21 08:00:00'));
         $slot->setEnds(new \DateTime('2019-09-21 09:00:00'));
@@ -26,6 +27,7 @@ class AppFixtures extends Fixture
         $manager->persist($slot);
 
         $slot = new Slot();
+        $slot->setId('abc-124');
         $slot->setPitch($pitch);
         $slot->setStarts(new \DateTime('2019-09-21 09:00:00'));
         $slot->setEnds(new \DateTime('2019-09-21 10:00:00'));
@@ -35,6 +37,7 @@ class AppFixtures extends Fixture
         $manager->persist($slot);
 
         $slot = new Slot();
+        $slot->setId('abc-125');
         $slot->setPitch($pitch);
         $slot->setStarts(new \DateTime('2019-09-21 10:00:00'));
         $slot->setEnds(new \DateTime('2019-09-21 11:00:00'));
@@ -49,6 +52,7 @@ class AppFixtures extends Fixture
         $manager->persist($pitch);
 
         $slot = new Slot();
+        $slot->setId('abc-126');
         $slot->setPitch($pitch);
         $slot->setStarts(new \DateTime('2019-09-21 08:00:00'));
         $slot->setEnds(new \DateTime('2019-09-21 09:00:00'));
@@ -58,6 +62,7 @@ class AppFixtures extends Fixture
         $manager->persist($slot);
 
         $slot = new Slot();
+        $slot->setId('abc-127');
         $slot->setPitch($pitch);
         $slot->setStarts(new \DateTime('2019-09-21 09:00:00'));
         $slot->setEnds(new \DateTime('2019-09-21 10:00:00'));
@@ -67,6 +72,7 @@ class AppFixtures extends Fixture
         $manager->persist($slot);
 
         $slot = new Slot();
+        $slot->setId('abc-128');
         $slot->setPitch($pitch);
         $slot->setStarts(new \DateTime('2019-09-21 11:00:00'));
         $slot->setEnds(new \DateTime('2019-09-21 12:00:00'));

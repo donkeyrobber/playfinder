@@ -3,12 +3,25 @@
 namespace App\JsonApi\Hydrator\Slot;
 
 use App\Entity\Slot;
+use Doctrine\Common\Persistence\ObjectManager;
+use Doctrine\ORM\EntityManager;
+use Doctrine\ORM\Id\UuidGenerator;
+use WoohooLabs\Yin\JsonApi\Exception\ExceptionFactoryInterface;
 
 /**
  * Create Slot Hydrator.
  */
 class CreateSlotHydrator extends AbstractSlotHydrator
 {
+    private $uuidGenerator;
+
+    public function __construct( ObjectManager $objectManager, ExceptionFactoryInterface $exceptionFactory, UuidGenerator $uuidGenerator)
+    {
+        $this->uuidGenerator = $uuidGenerator;
+
+        parent::__construct($objectManager, $exceptionFactory);
+    }
+
     /**
      * {@inheritdoc}
      */
@@ -31,5 +44,16 @@ class CreateSlotHydrator extends AbstractSlotHydrator
                 $slot->setAvailable($attribute);
             },
         ];
+    }
+
+    protected function generateId(): string
+    {
+        return $this->uuidGenerator->generate($this->objectManager, new Slot());
+    }
+
+    protected function setId($slot, string $id): Slot
+    {
+        $slot->setId($id);
+        return $slot;
     }
 }

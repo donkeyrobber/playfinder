@@ -13,8 +13,7 @@ class Slot
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="string", length=64)
      */
     private $id;
 
@@ -52,9 +51,17 @@ class Slot
      */
     private $available;
 
-    public function getId(): ?int
+    public function getId(): ?string
     {
         return $this->id;
+    }
+
+
+    public function setId(string $id): ?self
+    {
+        $this->id = $id;
+
+        return $this;
     }
 
     public function getStarts(): ?\DateTime

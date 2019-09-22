@@ -90,9 +90,9 @@ class PitchControllerTest extends DataFixtureTestCase
         $expected_data = [
             [
                 'type' => 'slots',
-                'id' => '1',
+                'id' => 'abc-123',
                 'links' => [
-                    'self' => '/slots/1'
+                    'self' => '/slots/abc-123'
                 ],
                 'attributes' => [
                     'starts' => '2019-09-21T08:00:00+00:00',
@@ -104,9 +104,9 @@ class PitchControllerTest extends DataFixtureTestCase
             ],
             [
                 'type' => 'slots',
-                'id' => '2',
+                'id' => 'abc-124',
                 'links' => [
-                    'self' => '/slots/2'
+                    'self' => '/slots/abc-124'
                 ],
                 'attributes' => [
                     'starts' => '2019-09-21T09:00:00+00:00',
@@ -118,9 +118,9 @@ class PitchControllerTest extends DataFixtureTestCase
             ],
             [
                 'type' => 'slots',
-                'id' => '3',
+                'id' => 'abc-125',
                 'links' => [
-                    'self' => '/slots/3'
+                    'self' => '/slots/abc-125'
                 ],
                 'attributes' => [
                     'starts' => '2019-09-21T10:00:00+00:00',
@@ -140,27 +140,16 @@ class PitchControllerTest extends DataFixtureTestCase
     }
 
     public function testPostSlots() {
+
         $payload = [
-            [
+            'data' => [
                 'type' => 'slots',
-                'id' => null,
                 'attributes' => [
-                    'starts' => '2019-09-21T11:00:00+00:00',
-                    'ends' => '2019-09-21T12:00:00+00:00',
+                    'starts' => '2019-09-21 12:00:00',
+                    'ends' => '2019-09-21 13:00:00',
                     'price'=> '20',
                     'currency' => 'GBP',
-                    'available' => true
-                ]
-            ],
-            [
-                'type' => 'slots',
-                'id' => null,
-                'attributes' => [
-                    'starts' => '2019-09-21T12:00:00+00:00',
-                    'ends' => '2019-09-21T13:00:00+00:00',
-                    'price'=> '20',
-                    'currency' => 'GBP',
-                    'available' => false
+                    'available' => 'false'
                 ]
             ]
         ];
@@ -173,6 +162,6 @@ class PitchControllerTest extends DataFixtureTestCase
             [],
             json_encode($payload)
         );
-        $this->assertEquals(201, $this->client->getResponse()->getStatusCode());
+        $this->assertEquals(200, $this->client->getResponse()->getStatusCode());
     }
 }

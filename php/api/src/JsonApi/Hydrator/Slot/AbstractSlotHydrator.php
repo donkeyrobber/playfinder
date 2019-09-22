@@ -69,7 +69,7 @@ abstract class AbstractSlotHydrator extends AbstractHydrator
     /**
      * {@inheritdoc}
      */
-    protected function setId($slot, string $id): void
+    protected function setId($slot, string $id): Slot
     {
         if ($id && (string) $slot->getId() !== $id) {
             throw new NotFoundHttpException('both ids in url & body bust be same');
